@@ -9,7 +9,7 @@ const Dict_card = ({ name, author }) => {
       </div>
 
       <div className="flex items-center">
-        <img className="h-5 w-5" src="i.png" alt="i_icon" />
+        <img className="h-5 w-5" src="/i.png" alt="i_icon" />
       </div>
 
 

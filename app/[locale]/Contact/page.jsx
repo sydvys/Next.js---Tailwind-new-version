@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const Contact = () => {
+  const t = useTranslations("Index");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [extra, setExtra] = useState("");
@@ -21,13 +23,11 @@ const Contact = () => {
 
   return (
     <div className="flex flex-col justify-center items-center mx-auto w-4/5 py-4">
-
       <form className="container grid gap-5" onSubmit={handleSubmit}>
-        <h1 className="text-[#ff5f53] text-2xl md:text-5xl font-light md:py-4">Contact us</h1>
-        <p className="text-white text-sm">
-          You can send us your wishes and proposals, or contact us for another
-          issue related to the “Bildilçin” project by using the form below.
-        </p>
+        <h1 className="text-[#ff5f53] text-2xl md:text-5xl font-light md:py-4">
+          {t("contact.title")}
+        </h1>
+        <p className="text-white text-sm"> {t("contact.p")} </p>
 
         <div className="pt-3 name">
           <div>
@@ -37,7 +37,7 @@ const Contact = () => {
               type="text"
               name="name"
               value={name}
-              placeholder="Your name and surname *"
+              placeholder={t("contact.placeholder.name")}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
@@ -52,7 +52,7 @@ const Contact = () => {
               name="email"
               autoComplete="email"
               value={email}
-              placeholder="Your e-mail address *"
+              placeholder={t("contact.placeholder.email")}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -64,7 +64,7 @@ const Contact = () => {
               type="text"
               name="extra"
               value={extra}
-              placeholder="Institution, which you represent"
+              placeholder={t("contact.placeholder.institution")}
               onChange={(e) => setExtra(e.target.value)}
             />
           </div>
@@ -76,21 +76,19 @@ const Contact = () => {
             id="message"
             name="message"
             value={message}
-            placeholder="Your message *"
+            placeholder={t("contact.placeholder.message")}
             onChange={(e) => setMessage(e.target.value)}
           />
         </div>
 
-        <p className="text-[#ff5f53] text-xs">
-          The mandatory fields are marked with the “ * ” symbol.
-        </p>
+        <p className="text-[#ff5f53] text-xs">{t("contact.note")} </p>
 
         <div className="py-1 button flex justify-end">
           <button
             className="bg-[#ff5f53] py-2 px-8 rounded-md text-white text-sm"
             type="submit"
           >
-            Send
+            {t("contact.button")}
           </button>
         </div>
       </form>

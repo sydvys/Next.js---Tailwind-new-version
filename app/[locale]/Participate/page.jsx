@@ -1,45 +1,33 @@
 import React from "react";
+import { useTranslations } from "next-intl";
 
 const Participate = () => {
+  const t = useTranslations("Index");
+
   return (
     <div className="mx-auto w-4/5 py-4 text-white text-sm">
       <h1 className="text-[#ff5f53] font-light text-2xl md:text-5xl md:py-4">
-        Participate in project
+        {t("participate.title")}{" "}
       </h1>
       <div>
-        <h2 className="text-[#ff5f53] py-3">Dear users!</h2>
-        <p className="">
-          If you like “Bildilçin” application, participate in its improvement
-          and development process:
-        </p>
+        <h2 className="text-[#ff5f53] py-3">
+          {" "}
+          {t("participate.content.innerTitleOne")}{" "}
+        </h2>
+        <p className="">{t("participate.content.p1")}</p>
         <ul className="list-disc ml-6 px-4 py-2">
-          <li className="py-2">
-            Inform us about literal errors you discover within dictionaries.
-            This takes not more than a couple of seconds – without leaving the
-            dictionary entry, just select text fragment, which contains error,
-            and press “Ctrl“ + “Enter” keys;
-          </li>
-          <li className="py-2">
-            Share the information about “Bildilçin” in social networks, install
-            the mobile version of the application, rate it and provide positive
-            feedback. We believe that growing popularity of the project may
-            inspire different authors to present us their dictionaries, which we
-            will gladly add to “Bildilchin” for you.
-          </li>
+          <li className="py-2">{t("participate.content.list.one")} </li>
+          <li className="py-2">{t("participate.content.list.two")}</li>
         </ul>
       </div>
 
       <div>
-        <h2 className="text-[#ff5f53] ">Dear authors of dictionaries!</h2>
-        <p className="py-2">
-          If you wish to participate in our non-commercial project, by
-          presenting your dictionary of any purpose (explanatory, translation or
-          terminological) for our adding it into “Bildilçin” application,
-          contact us by sending an e-mail from “Contact us“ page of our
-          web-site.
-        </p>
-        <p className="py-1">Respectfully yours,</p>
-        <p>“Bildilçin” developer team</p>
+        <h2 className="text-[#ff5f53] ">
+          {t("participate.content.innerTitleTwo")}
+        </h2>
+        <p className="py-2">{t("participate.content.p2")}</p>
+        <p className="py-1"> {t("participate.content.p3")}</p>
+        <p> {t("participate.content.p4")}</p>
       </div>
     </div>
   );
