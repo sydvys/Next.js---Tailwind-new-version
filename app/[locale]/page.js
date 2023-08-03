@@ -9,21 +9,20 @@ export default function Home({ children }) {
   const t = useTranslations("Index");
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const heightClass = inputValue ? "h-80" : "h-32";
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
 
-  // const containerStyle = {
-  //   height: inputValue ? "20rem" : "8rem",
-  // };
-
   return (
     <div>
       <main className="h-full">
-      <div className={`bg-gray-100 ${inputValue ? "h-80" : "h-32"} flex flex-col pt-5 items-center mx-auto w-2/5 xl:w-1/2 rounded-[5px]`}>
-         
-         {/* <div className=" "> */}
+        <div
+          className={`bg-gray-100 ${
+            inputValue ? "h-80" : "h-32"
+          } flex flex-col pt-5 items-center mx-auto w-2/5 xl:w-1/2 rounded-[5px]`}
+        >
           <div className="p-3 flex items-start relative top-[-16px] w-full">
             <div className="relative flex items-start h-9 rounded-3px bg-white overflow-hidden w-full border-1 border-gray-300 ">
               <div className="grid place-items-start h-full w-12 text-gray-300">
@@ -117,8 +116,22 @@ export default function Home({ children }) {
               {t("home.entries")}{" "}
             </button>
           </div>
-          {/* </div> */}
 
+          <div className={` ${heightClass} flex `} >
+            {inputValue && (
+              <>
+                <button className="h-fit bg-blue-500 text-white rounded">
+                  Button 1
+                </button>
+                <button className="h-fit bg-green-500 text-white rounded">
+                  Button 2
+                </button>
+                <button className="h-fit bg-pink-500 text-white rounded">
+                  Button 2
+                </button>
+              </>
+            )}
+          </div>
         </div>
       </main>
     </div>
