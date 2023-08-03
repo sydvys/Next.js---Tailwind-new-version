@@ -8,28 +8,24 @@ import { useState } from "react";
 export default function Home({ children }) {
   const t = useTranslations("Index");
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  // const containerStyle = {
+  //   height: inputValue ? "20rem" : "8rem",
+  // };
 
   return (
     <div>
-      {/* <div className="text-white px-5">
-        <div>
-          <Link href="/" locale="en" className="px-2">
-            in english
-          </Link>
-          {""}
-          {""}
-          <Link href="/" locale="az" className="px-2">
-            in azeri
-          </Link>
-        </div>
-        <p>{t("title")}</p>
-        <AlertMessage message={t("message")} />
-      </div> */}
-
       <main className="h-full">
-        <div className="bg-gray-100 h-32 flex flex-col justify-center items-center mx-auto w-2/5 xl:w-1/2 rounded-[5px]">
+      <div className={`bg-gray-100 ${inputValue ? "h-80" : "h-32"} flex flex-col pt-5 items-center mx-auto w-2/5 xl:w-1/2 rounded-[5px]`}>
+         
+         {/* <div className=" "> */}
           <div className="p-3 flex items-start relative top-[-16px] w-full">
-            <div className="relative flex items-start h-9 rounded-3px bg-white overflow-hidden w-full border-1 border-gray-300">
+            <div className="relative flex items-start h-9 rounded-3px bg-white overflow-hidden w-full border-1 border-gray-300 ">
               <div className="grid place-items-start h-full w-12 text-gray-300">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -52,6 +48,8 @@ export default function Home({ children }) {
                 type="text"
                 id="search"
                 placeholder={t("home.placeholder")}
+                value={inputValue}
+                onChange={handleInputChange}
               />
             </div>
 
@@ -119,12 +117,10 @@ export default function Home({ children }) {
               {t("home.entries")}{" "}
             </button>
           </div>
+          {/* </div> */}
+
         </div>
       </main>
-
-      {/* <div className="text-white hidden">
-        <p>Akshin</p>
-      </div> */}
     </div>
   );
 }
