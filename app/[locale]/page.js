@@ -53,7 +53,7 @@ export default function Home({ children }) {
         <div
           className={`bg-gray-100 ${
             inputValue ? "h-80" : "h-32"
-          } flex flex-col pt-5 items-center mx-auto w-2/5 xl:w-1/2 rounded-[5px]`}
+          } relative flex flex-col pt-5 items-center mx-auto w-2/5 xl:w-1/2 rounded-[5px]`}
         >
           <div className="p-3 flex items-start relative top-[-16px] w-full">
             <div className="relative flex items-start h-9 rounded-3px bg-white overflow-hidden w-full border-1 border-gray-300 ">
@@ -168,18 +168,22 @@ export default function Home({ children }) {
             )}
           </div>
 
-          {suggestions.length > 0 && (
-              <ul className="absolute bg-white mt-2 w-full max-h-32 overflow-y-auto border border-gray-300 rounded-md">
-                {suggestions.map((name, index) => (
-                  <li
-                    key={index}
-                    // className="px-3 py-2 cursor-pointer hover:bg-gray-100"
-                    onClick={() => setInputValue(name)}
-                  >
-                    {name}
-                  </li>
-                ))}
-              </ul>
+          {inputValue !== "" && suggestions.length > 0 && (
+              <div
+                className="absolute bottom-0 bg-white mt-2 w-full max-h-32 overflow-y-auto border border-gray-300 rounded-md"
+              >
+                <ul className="py-2 text-sm text-black">
+                  {suggestions.map((name, index) => (
+                    <li
+                      key={index}
+                      className="px-3 py-2 cursor-pointer hover:bg-gray-100"
+                      onClick={() => setInputValue(name)}
+                    >
+                      {name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
             
         </div>
