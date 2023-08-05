@@ -13,7 +13,12 @@
     "home": {
       "placeholder": "Search",
       "wordlist": "Word-list",
-      "entries": "Entries"
+      "entries": "Entries",
+      "options": {
+        "begins": "Begins", 
+        "contains": "Contains",
+        "ends": "Ends"
+      }
     },
     "help": {
       "title": "Help"

@@ -13,7 +13,12 @@
     "home": {
       "placeholder": "Axtar",
       "wordlist": "Sözlük",
-      "entries": "Məqalələr"
+      "entries": "Məqalələr",
+      "options": {
+        "begins": "Başlayır", 
+        "contains": "Başlayır Özündə Saxlayır",
+        "ends": "Bitir"
+      }
     },
     "help": {
       "title": "Yardım"

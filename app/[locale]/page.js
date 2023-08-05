@@ -1,18 +1,50 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import Link from "next-intl/link";
-import AlertMessage from "./AlertMessage";
 import { useState } from "react";
+
+
+const names = [
+  "John",
+  "Alice",
+  "Bob",
+  "Eve",
+  "Michael",
+  "Emily",
+  "David",
+  "Sophia",
+  "Daniel",
+  "Olivia",
+  "William",
+  "Ava",
+  "James",
+  "Emma",
+  "Alexander",
+  "Isabella",
+  "Benjamin",
+  "Mia",
+  "Matthew",
+  "Charlotte",
+]; 
+
 
 export default function Home({ children }) {
   const t = useTranslations("Index");
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const heightClass = inputValue ? "h-80" : "h-32";
+  const [suggestions, setSuggestions] = useState([]); // New state to hold filtered suggestions
+
 
   const handleInputChange = (e) => {
-    setInputValue(e.target.value);
+    const inputValue = e.target.value;
+    setInputValue(inputValue);
+
+    // Filter names based on the entered text and set the filtered suggestions state
+    const filteredSuggestions = names.filter((name) =>
+      name.toLowerCase().includes(inputValue.toLowerCase())
+    );
+    setSuggestions(filteredSuggestions);
   };
 
   return (
@@ -49,7 +81,10 @@ export default function Home({ children }) {
                 placeholder={t("home.placeholder")}
                 value={inputValue}
                 onChange={handleInputChange}
+                list="nameSuggestions"
               />
+               {/* Render suggestions if there are any */}
+            
             </div>
 
             <div className="relative bg-white">
@@ -75,7 +110,7 @@ export default function Home({ children }) {
                     d="m1 1 4 4 4-4"
                   />
                 </svg>
-                EN{" "}
+                EN
               </button>
 
               <div
@@ -113,25 +148,40 @@ export default function Home({ children }) {
               {t("home.wordlist")}
             </button>
             <button className="bg-[#475a95] text-white py-1 sm:px-6 rounded-r-[3px] w-full">
-              {t("home.entries")}{" "}
+              {t("home.entries")}
             </button>
           </div>
 
-          <div className={` ${heightClass} flex `} >
+          <div className={` ${heightClass} flex justify-evenly  `}>
             {inputValue && (
               <>
-                <button className="h-fit bg-blue-500 text-white rounded">
-                  Button 1
+                <button className="h-fit w-32 text-gray-500">
+                  {t("home.options.begins")}
                 </button>
-                <button className="h-fit bg-green-500 text-white rounded">
-                  Button 2
+                <button className="h-fit w-32 text-gray-500">
+                  {t("home.options.contains")}
                 </button>
-                <button className="h-fit bg-pink-500 text-white rounded">
-                  Button 2
+                <button className="h-fit w-32 text-gray-500">
+                  {t("home.options.ends")}
                 </button>
               </>
             )}
           </div>
+
+          {suggestions.length > 0 && (
+              <ul className="absolute bg-white mt-2 w-full max-h-32 overflow-y-auto border border-gray-300 rounded-md">
+                {suggestions.map((name, index) => (
+                  <li
+                    key={index}
+                    // className="px-3 py-2 cursor-pointer hover:bg-gray-100"
+                    onClick={() => setInputValue(name)}
+                  >
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            )}
+            
         </div>
       </main>
     </div>

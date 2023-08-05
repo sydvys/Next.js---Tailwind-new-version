@@ -13,7 +13,12 @@
     "home": {
       "placeholder": "Поиск",
       "wordlist": "Словник",
-      "entries": "Статьи"
+      "entries": "Статьи",
+      "options": {
+        "begins": "Начинается", 
+        "contains": "Начинается Содержит",
+        "ends": "Заканчивается"
+      }
     },
     "help": {
       "title": "Помощь"
