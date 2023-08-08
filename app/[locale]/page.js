@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import Popup from "./Dict/Popup/Popup";
 
 const names = [
   "John",
@@ -33,6 +34,15 @@ export default function Home({ children }) {
   const heightClass = inputValue ? "h-96" : "h-32";
   const [suggestions, setSuggestions] = useState([]);
   const [activeOption, setActiveOption] = useState("");
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
 
   const handleButtonClick = (option) => {
     setActiveOption(option === activeOption ? "" : option);
@@ -193,7 +203,10 @@ export default function Home({ children }) {
                   <li
                     key={index}
                     className="px-3 py-2 cursor-pointer hover:bg-gray-100"
-                    onClick={() => setInputValue(name)}
+                    onClick={() => {
+                      setInputValue(name); 
+                      setIsPopupOpen(true);
+                    }}
                   >
                     {name}
                   </li>
@@ -201,6 +214,16 @@ export default function Home({ children }) {
               </ul>
             </div>
           )}
+
+          <button className="pointer bg-red-600" onClick={openPopup}>
+            Open Popup
+          </button>
+
+          <Popup
+            className="bg-black"
+            isOpen={isPopupOpen}
+            onClose={closePopup}
+          />
         </div>
       </main>
     </div>
