@@ -3,7 +3,6 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-
 const names = [
   "John",
   "Alice",
@@ -25,22 +24,24 @@ const names = [
   "Mia",
   "Matthew",
   "Charlotte",
-]; 
-
+];
 
 export default function Home({ children }) {
   const t = useTranslations("Index");
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const heightClass = inputValue ? "h-80" : "h-32";
-  const [suggestions, setSuggestions] = useState([]); // New state to hold filtered suggestions
+  const heightClass = inputValue ? "h-96" : "h-32";
+  const [suggestions, setSuggestions] = useState([]);
+  const [activeOption, setActiveOption] = useState("");
 
+  const handleButtonClick = (option) => {
+    setActiveOption(option === activeOption ? "" : option);
+  };
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     setInputValue(inputValue);
 
-    // Filter names based on the entered text and set the filtered suggestions state
     const filteredSuggestions = names.filter((name) =>
       name.toLowerCase().includes(inputValue.toLowerCase())
     );
@@ -52,7 +53,7 @@ export default function Home({ children }) {
       <main className="h-full">
         <div
           className={`bg-gray-100 ${
-            inputValue ? "h-80" : "h-32"
+            inputValue ? "h-96" : "h-32"
           } relative flex flex-col pt-5 items-center mx-auto w-2/5 xl:w-1/2 rounded-[5px]`}
         >
           <div className="p-3 flex items-start relative top-[-16px] w-full">
@@ -83,8 +84,6 @@ export default function Home({ children }) {
                 onChange={handleInputChange}
                 list="nameSuggestions"
               />
-               {/* Render suggestions if there are any */}
-            
             </div>
 
             <div className="relative bg-white">
@@ -152,16 +151,35 @@ export default function Home({ children }) {
             </button>
           </div>
 
-          <div className={` ${heightClass} flex justify-evenly  `}>
+          <div className={` ${heightClass} flex justify-evenly w-full mt-2`}>
             {inputValue && (
               <>
-                <button className="h-fit w-32 text-gray-500">
-                  {t("home.options.begins")}
-                </button>
-                <button className="h-fit w-32 text-gray-500">
+                <div className="underline decoration-green-600 ">
+                  <button
+                    className={`h-fit text-gray-500 ${
+                      activeOption === "begins" ? " text-red-400" : ""
+                    }`}
+                    onClick={() => handleButtonClick("begins")}
+                  >
+                    {t("home.options.begins")}
+                  </button>
+                </div>
+
+                <button
+                  className={`h-fit text-gray-500 ${
+                    activeOption === "contains" ? " text-red-400" : ""
+                  }`}
+                  onClick={() => handleButtonClick("contains")}
+                >
                   {t("home.options.contains")}
                 </button>
-                <button className="h-fit w-32 text-gray-500">
+
+                <button
+                  className={`h-fit text-gray-500 ${
+                    activeOption === "ends" ? " text-red-400" : ""
+                  }`}
+                  onClick={() => handleButtonClick("ends")}
+                >
                   {t("home.options.ends")}
                 </button>
               </>
@@ -169,23 +187,20 @@ export default function Home({ children }) {
           </div>
 
           {inputValue !== "" && suggestions.length > 0 && (
-              <div
-                className="absolute bottom-0 bg-white mt-2 w-full max-h-32 overflow-y-auto border border-gray-300 rounded-md"
-              >
-                <ul className="py-2 text-sm text-black">
-                  {suggestions.map((name, index) => (
-                    <li
-                      key={index}
-                      className="px-3 py-2 cursor-pointer hover:bg-gray-100"
-                      onClick={() => setInputValue(name)}
-                    >
-                      {name}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            
+            <div className="absolute bottom-0 bg-white mt-2 w-full h-56 overflow-y-auto border border-gray-300 rounded-md">
+              <ul className="py-2 text-sm text-black">
+                {suggestions.map((name, index) => (
+                  <li
+                    key={index}
+                    className="px-3 py-2 cursor-pointer hover:bg-gray-100"
+                    onClick={() => setInputValue(name)}
+                  >
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </main>
     </div>
