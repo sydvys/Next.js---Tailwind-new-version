@@ -2,7 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import Popup from "./Dict/Popup/Popup";
+import HomePopup from "./HomePopUp/HomePopup";
+import React, { useEffect, useRef } from "react";
 
 const names = [
   "John",
@@ -27,7 +28,7 @@ const names = [
   "Charlotte",
 ];
 
-export default function Home({ children }) {
+export default function Home({ children, isOpen, onClose }) {
   const t = useTranslations("Index");
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -35,6 +36,24 @@ export default function Home({ children }) {
   const [suggestions, setSuggestions] = useState([]);
   const [activeOption, setActiveOption] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedName, setSelectedName] = useState(""); // State to store the selected name
+  const popupRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (isOpen && !popupRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isOpen, onClose]);
 
   const openPopup = () => {
     setIsPopupOpen(true);
@@ -204,7 +223,8 @@ export default function Home({ children }) {
                     key={index}
                     className="px-3 py-2 cursor-pointer hover:bg-gray-100"
                     onClick={() => {
-                      setInputValue(name); 
+                      setInputValue(name);
+                      setSelectedName(name); // Set the selected name in the state
                       setIsPopupOpen(true);
                     }}
                   >
@@ -215,15 +235,24 @@ export default function Home({ children }) {
             </div>
           )}
 
-          <button className="pointer bg-red-600" onClick={openPopup}>
-            Open Popup
-          </button>
-
-          <Popup
-            className="bg-black"
+          {/* <HomePopup
+            className=""
             isOpen={isPopupOpen}
             onClose={closePopup}
-          />
+          /> */}
+
+          {isPopupOpen && (
+            <div className="flex absolute top-0 left-52 justify-center z-50 bg-indigo-700  w-2/5">
+              <div className="  "></div>
+              <div
+                ref={popupRef}
+                className="bg-white rounded-lg p-6 z-10 "
+              >
+                <h2 className="text-lg font-bold mb-4">{selectedName}</h2>
+                <p className="mb-4">This is the content of the popup.</p>
+              </div>
+            </div>
+          )}
         </div>
       </main>
     </div>
