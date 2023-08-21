@@ -81,11 +81,11 @@ export default function Home({ children, isOpen, onClose }) {
     <div>
       <main className="h-full">
         <div
-         className={`bg-gray-100 ${
-          inputValue ? "h-96" : "h-32"
-        } relative flex flex-col pt-5 items-center mx-auto w-2/5 xl:w-1/2 rounded-[5px] ${
-          isPopupOpen ? "right-32" : "" 
-        }`}
+          className={`bg-gray-100 ${
+            inputValue ? "h-96" : "h-32"
+          } relative flex lg:flex-grow flex-col pt-5 items-center mx-auto w-[45%] rounded-[5px] ${
+            isPopupOpen ? "right-[22%]" : ""
+          }`}
         >
           <div className="p-3 flex items-start relative top-[-16px] w-full">
             <div className="relative flex items-start h-9 rounded-3px bg-white overflow-hidden w-full border-1 border-gray-300 ">
@@ -244,11 +244,9 @@ export default function Home({ children, isOpen, onClose }) {
           /> */}
 
           {isPopupOpen && (
-            <div className="flex absolute top-0 left-52 justify-center z-50 w-56 h-96 ml-2">
-              <div
-                ref={popupRef}
-                className="bg-white rounded-lg p-6 z-10 w-"
-              >
+            <div className="flex absolute top-0 left-[102%] justify-center z-50 w-[100%] h-96 sm:h-32">
+              <div ref={popupRef} className="bg-white rounded-lg p-6 z-10 w-[150%]
+               ">
                 <h2 className="text-lg font-bold mb-4">{selectedName}</h2>
                 <p className="mb-4">This is the content of the popup.</p>
               </div>

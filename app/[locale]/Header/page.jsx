@@ -1,14 +1,12 @@
-"use client";
 
-import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import Link from "next-intl/link";
-import { Fragment, useState } from "react";
 import { useTranslations } from "next-intl";
+import Link from "next-intl/link";
+import Options from "./Options/Options";
+import Icon from "./Icon/Icon";
 
-const Header = () => {
-  const [navbar, setNavbar] = useState(false);
-  const [isProjectOpen, setProjectOpen] = useState(false);
+const Header = ({navbar, setNavbar}) => {
+  // const [navbar, setNavbar] = useState(false);
+  // const [isProjectOpen, setProjectOpen] = useState(false);
   const t = useTranslations("Index");
 
   return (
@@ -21,10 +19,10 @@ const Header = () => {
                 <img className="w-20 md:w-32" src="/logo.svg" alt="logo" />
               </div>
             </Link>
-            <div className="md:hidden relative bottom-3">
+            {/* <div className="md:hidden relative bottom-3 bg-pink-500">
               <button
                 className=" text-gray-700 rounded-md outline-none focus:border-gray-400"
-                onClick={() => setNavbar(!navbar)}
+                // onClick={() => setNavbar(!navbar)}
               >
                 {navbar ? (
                   <svg
@@ -60,17 +58,18 @@ const Header = () => {
                   </svg>
                 )}
               </button>
-            </div>
+            </div> */}
+            <Icon />
           </div>
         </div>
 
-        <div>
+        <div className="">
           <div
             className={`flex-1 justify-self-center md:block relative" ${
               navbar ? "block" : "hidden"
             }`}
           >
-            <ul className="md:flex bg-[#3c4e88] absolute inset-x-0 top-0 md:relative z-10">
+            {/* <ul className="md:flex bg-[#3c4e88] absolute inset-x-0 top-0 md:relative z-10">
               <li className="pb-3 text-lg py-2 px-3 justify-start hidden md:inline ">
                 <Link
                   target="_blank"
@@ -215,9 +214,13 @@ const Header = () => {
                   </Menu>
                 </li>
               </div>
-            </ul>
+            </ul> */}
+
+            <Options/>
+            
           </div>
         </div>
+
       </div>
     </nav>
   );
