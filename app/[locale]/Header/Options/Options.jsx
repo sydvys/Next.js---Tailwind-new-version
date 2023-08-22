@@ -12,8 +12,15 @@ const Options = () => {
   const { navbar, setNavbar, isProjectOpen, setProjectOpen } =
     useProjectContext();
 
+  console.log("navbar:", navbar);
+  console.log("isProjectOpen:", isProjectOpen);
+
   return (
-    <div>
+    <div
+      className={`flex-1 justify-self-center md:block relative" ${
+        navbar ? "block" : "hidden"
+      }`}
+    >
       <ul className="md:flex bg-[#3c4e88] absolute inset-x-0 top-0 md:relative z-10">
         <li className="pb-3 text-lg py-2 px-3 justify-start hidden md:inline ">
           <Link
@@ -128,7 +135,7 @@ const Options = () => {
                 // leaveFrom="transform opacity-100 scale-100"
                 // leaveTo="transform opacity-0 scale-95"
               >
-                <Menu.Items className="absolute right-0 z-10 origin-top-right bg-slate-400">
+                <Menu.Items className="absolute right-0 z-10 origin-top-right">
                   <div className="py-1">
                     <Menu.Item>
                       <Link

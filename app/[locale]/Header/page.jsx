@@ -65,9 +65,9 @@ const Header = ({navbar, setNavbar}) => {
 
         <div className="">
           <div
-            className={`flex-1 justify-self-center md:block relative" ${
-              navbar ? "block" : "hidden"
-            }`}
+            // className={`flex-1 justify-self-center md:block relative" ${
+            //   navbar ? "block" : "hidden"
+            // }`}
           >
             {/* <ul className="md:flex bg-[#3c4e88] absolute inset-x-0 top-0 md:relative z-10">
               <li className="pb-3 text-lg py-2 px-3 justify-start hidden md:inline ">
